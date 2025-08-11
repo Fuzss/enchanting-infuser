@@ -22,6 +22,5 @@ public class BuiltInEnchantmentTagsProvider extends AbstractTagProvider<Enchantm
         this.tag(ModRegistry.IN_ADVANCED_ENCHANTING_INFUSER_ENCHANTMENT_TAG)
                 .addTag(EnchantmentTags.IN_ENCHANTING_TABLE, EnchantmentTags.TREASURE)
                 .removeTag(EnchantmentTags.CURSE);
-        ;
     }
 }
