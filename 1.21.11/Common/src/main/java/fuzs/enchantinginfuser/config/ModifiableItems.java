@@ -1,6 +1,7 @@
 package fuzs.enchantinginfuser.config;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import java.util.function.Predicate;
 
@@ -15,7 +16,12 @@ public enum ModifiableItems {
         this.predicate = predicate;
     }
 
+    /**
+     * Do not use {@link ItemStack#isEnchantable()} as it requires
+     * {@link net.minecraft.core.component.DataComponents#ENCHANTABLE} to be present, which e.g., the elytra does not
+     * have.
+     */
     private static boolean isItemEnchantableOrEnchanted(ItemStack itemStack) {
-        return itemStack.isEnchantable() || itemStack.isEnchanted();
+        return EnchantmentHelper.canStoreEnchantments(itemStack) || itemStack.isEnchanted();
     }
 }
