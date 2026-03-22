@@ -3,11 +3,11 @@
         "id": "enchantinginfuser",
         "group": "fuzs.enchantinginfuser",
         "name": "Enchanting Infuser",
-        "version": "21.11.1",
+        "version": "21.11.2",
         "authors": [
             "Fuzs"
         ],
-        "description": "An all new enchanting table: Choose your enchantments for fair prices! Plus no more randomness!",
+        "description": "An all-new enchanting table: Choose your enchantments for fair prices! Plus no more randomness!",
         "license": "MPL-2.0"
     },
     "dependencies": [
