@@ -30,14 +30,12 @@ public class ServerConfig implements ConfigCore {
     }
 
     public static class InfuserConfig implements ConfigCore {
-        @Config(
-                description = {
-                        "How many bookshelves you need around the infuser to be able to apply maximum level enchantments.",
-                        "Filling in corners is important to reach higher values.",
-                        "Setting very high values may require modded bookshelves that provide more than one enchanting power per block (such as Apotheosis' bookshelves).",
-                        "This value will be fixed at 50 when Apotheosis is installed."
-                }
-        )
+        @Config(description = {
+                "How many bookshelves you need around the infuser to be able to apply maximum level enchantments.",
+                "Filling in corners is important to reach higher values.",
+                "Setting very high values may require modded bookshelves that provide more than one enchanting power per block (such as Apotheosis' bookshelves).",
+                "This value will be fixed at 50 when Apotheosis is installed."
+        })
         @Config.IntRange(min = 0)
         public int maximumBookshelves = 15;
         @Config(description = "Allow enchantments on an already enchanted item to be increased / removed.")
@@ -50,12 +48,7 @@ public class ServerConfig implements ConfigCore {
         public boolean increaseAnvilRepairCost = false;
         @Config
         public RepairConfig repair = new RepairConfig();
-        @Config(
-                description = {
-                        "The main option in this section is \"maximum_cost\" as it determines how many levels you'll have to pay for fully enchanting an item with all possible enchantments it can have.",
-                        "Cost multipliers mainly control how this maximum cost will be spread out between enchantments of different rarities."
-                }
-        )
+        @Config
         public CostsConfig costs = new CostsConfig();
         @Config(description = "Allow enchantments that can normally not be obtained from an enchanting table, but can be put on the item in an anvil (e.g. sharpness on an axe).")
         public boolean allowAnvilEnchantments = false;
@@ -71,11 +64,10 @@ public class ServerConfig implements ConfigCore {
     }
 
     public static class CostsConfig implements ConfigCore {
-        @Config(
-                description = {
-                        "Cost level to scale prices by. This is not a strict value, meaning it can be exceeded (e.g. when applying treasure enchantments)."
-                }
-        )
+        @Config(description = {
+                "Global scale for all enchantment prices. Represents the maximum total cost when the most expensive combination of enchantments for a given item is applied at once.",
+                "This is not a strict value and may be exceeded, since each applied enchantment level always costs at least one."
+        })
         @Config.IntRange(min = 1)
         public int maximumCost = 30;
         @Config(description = "When scaling costs, only account for vanilla enchantments. Otherwise enchanting costs will become ludicrously cheap with many modded enchantments present.")

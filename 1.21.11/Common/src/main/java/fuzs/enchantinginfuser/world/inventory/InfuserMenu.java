@@ -349,7 +349,7 @@ public class InfuserMenu extends AbstractContainerMenu implements ContainerListe
                     this.getScalingNamespaces());
             int maximumCost = Mth.ceil(
                     this.getConfig().costs.maximumCost * EnchantingBehavior.get().getMaximumCostMultiplier());
-            enchantmentCostsScale = Math.min(1.0F, maximumCost / (float) scalingEnchantmentCosts);
+            enchantmentCostsScale = maximumCost / (float) scalingEnchantmentCosts;
         }
 
         float enchantmentCosts = EnchantmentCostHelper.getEnchantmentCosts(itemEnchantments, enchantmentCostsScale);
