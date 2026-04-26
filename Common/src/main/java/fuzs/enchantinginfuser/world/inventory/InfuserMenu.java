@@ -12,9 +12,9 @@ import fuzs.enchantinginfuser.util.PlayerExperienceHelper;
 import fuzs.enchantinginfuser.world.item.enchantment.EnchantingBehavior;
 import fuzs.enchantinginfuser.world.level.block.InfuserBlock;
 import fuzs.enchantinginfuser.world.level.block.InfuserType;
-import fuzs.puzzleslib.api.container.v1.QuickMoveRuleSet;
-import fuzs.puzzleslib.api.network.v4.MessageSender;
-import fuzs.puzzleslib.api.network.v4.PlayerSet;
+import fuzs.puzzleslib.common.api.container.v1.QuickMoveRuleSet;
+import fuzs.puzzleslib.common.api.network.v4.MessageSender;
+import fuzs.puzzleslib.common.api.network.v4.PlayerSet;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -272,7 +272,7 @@ public class InfuserMenu extends AbstractContainerMenu implements ContainerListe
                         SoundEvents.ENCHANTMENT_TABLE_USE,
                         SoundSource.BLOCKS,
                         1.0F,
-                        level.random.nextFloat() * 0.1F + 0.9F);
+                        level.getRandom().nextFloat() * 0.1F + 0.9F);
             });
 
             return true;
@@ -286,7 +286,7 @@ public class InfuserMenu extends AbstractContainerMenu implements ContainerListe
         if (enchantingCost < 0) {
             int amount = PlayerExperienceHelper.calculateExperienceDelta(this.getItemEnchantments(),
                     this.getOriginalEnchantments(),
-                    level.random);
+                    level.getRandom());
             ExperienceOrb.award((ServerLevel) level, Vec3.atCenterOf(blockPos.above()), amount);
         } else if (!player.getAbilities().instabuild) {
             // don't use Player::onEnchantmentPerformed as it also resets enchantments seed which we have nothing to do with

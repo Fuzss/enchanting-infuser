@@ -6,9 +6,10 @@ import fuzs.enchantinginfuser.client.gui.components.*;
 import fuzs.enchantinginfuser.client.util.EnchantmentTooltipHelper;
 import fuzs.enchantinginfuser.network.client.ServerboundEnchantmentLevelMessage;
 import fuzs.enchantinginfuser.world.inventory.InfuserMenu;
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.puzzleslib.common.api.client.gui.v2.components.AbstractMenuSelectionList;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
@@ -82,9 +83,7 @@ public class InfuserScreen extends AbstractWidgetsContainerScreen<InfuserMenu> i
     private InfuserMenuButton repairButton;
 
     public InfuserScreen(InfuserMenu infuserMenu, Inventory inventory, Component title) {
-        super(infuserMenu, inventory, title);
-        this.imageWidth = 220;
-        this.imageHeight = 185;
+        super(infuserMenu, inventory, title, 220, 185);
         this.inventoryLabelX = 30;
         this.inventoryLabelY = this.imageHeight - 94;
         this.getMenu().addSlotListener(this);
@@ -325,14 +324,14 @@ public class InfuserScreen extends AbstractWidgetsContainerScreen<InfuserMenu> i
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         isPowerTooLow = false;
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 TEXTURE_LOCATION,
                 this.leftPos,
@@ -368,16 +367,16 @@ public class InfuserScreen extends AbstractWidgetsContainerScreen<InfuserMenu> i
     private class EnchantmentSelectionList extends AbstractMenuSelectionList<EnchantmentSelectionList.Entry> {
 
         public EnchantmentSelectionList(int x, int y) {
-            super(InfuserScreen.this.minecraft, x, y, 160, 70, SQUARE_BUTTON_SIZE, 8);
+            super(InfuserScreen.this.minecraft, x, y, 160, 70, SQUARE_BUTTON_SIZE);
+        }
+
+        @Override
+        protected int scrollBarX() {
+            return this.getRowRight() + 8;
         }
 
         public void addEntry(Holder<Enchantment> holder, LevelBasedEntry<Enchantment> levelBasedEntry) {
             this.addEntry(new Entry(holder, levelBasedEntry));
-        }
-
-        @Override
-        public void clearEntries() {
-            super.clearEntries();
         }
 
         class Entry extends AbstractMenuSelectionList.Entry<Entry> {
@@ -439,14 +438,14 @@ public class InfuserScreen extends AbstractWidgetsContainerScreen<InfuserMenu> i
             }
 
             @Override
-            public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovering, float partialTick) {
+            public void extractContent(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, boolean hovering, float partialTick) {
                 guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
                         this.backgroundSprite,
                         this.getContentX(),
                         this.getContentY(),
                         this.getContentWidth(),
                         this.getContentHeight());
-                super.renderContent(guiGraphics, mouseX, mouseY, hovering, partialTick);
+                super.extractContent(guiGraphics, mouseX, mouseY, hovering, partialTick);
                 if (hovering && this.isPowerTooLow) {
                     InfuserScreen.setIsPowerTooLow(true);
                 }

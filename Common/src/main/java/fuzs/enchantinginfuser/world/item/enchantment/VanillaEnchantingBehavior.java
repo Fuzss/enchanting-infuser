@@ -1,7 +1,7 @@
 package fuzs.enchantinginfuser.world.item.enchantment;
 
 import fuzs.enchantinginfuser.world.level.block.InfuserType;
-import fuzs.puzzleslib.api.item.v2.EnchantingHelper;
+import fuzs.puzzleslib.common.api.item.v2.EnchantingHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.enchantment.Enchantment;

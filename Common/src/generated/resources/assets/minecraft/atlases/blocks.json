@@ -2,7 +2,7 @@
   "sources": [
     {
       "type": "minecraft:single",
-      "resource": "enchantinginfuser:entity/enchanting_infuser_book"
+      "resource": "enchantinginfuser:entity/enchantment/enchanting_infuser_book"
     }
   ]
 }

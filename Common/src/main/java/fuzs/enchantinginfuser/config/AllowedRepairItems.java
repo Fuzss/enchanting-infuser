@@ -1,6 +1,6 @@
 package fuzs.enchantinginfuser.config;
 
-import fuzs.puzzleslib.api.item.v2.ToolTypeHelper;
+import fuzs.puzzleslib.common.api.item.v2.ToolTypeHelper;
 import net.minecraft.world.item.ItemStack;
 
 public enum AllowedRepairItems {

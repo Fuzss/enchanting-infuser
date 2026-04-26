@@ -1,7 +1,7 @@
 package fuzs.enchantinginfuser.client.gui.components;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -21,7 +21,7 @@ public class ItemStackDisplayWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.hasHighlight()) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
                     AbstractContainerScreen.SLOT_HIGHLIGHT_BACK_SPRITE,
@@ -31,10 +31,10 @@ public class ItemStackDisplayWidget extends AbstractWidget {
                     24);
         }
 
-        guiGraphics.renderFakeItem(this.itemStack, this.getX(), this.getY());
+        guiGraphics.fakeItem(this.itemStack, this.getX(), this.getY());
         int posX = this.getX() + 19 - 2 - this.font.width(this.getMessage());
         int posY = this.getY() + 6 + 3;
-        guiGraphics.drawString(this.font, this.getMessage(), posX, posY, -1);
+        guiGraphics.text(this.font, this.getMessage(), posX, posY, -1);
         if (this.hasHighlight()) {
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
                     AbstractContainerScreen.SLOT_HIGHLIGHT_FRONT_SPRITE,

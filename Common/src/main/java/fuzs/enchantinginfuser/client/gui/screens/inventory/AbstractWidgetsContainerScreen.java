@@ -1,7 +1,7 @@
 package fuzs.enchantinginfuser.client.gui.screens.inventory;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import fuzs.puzzleslib.api.core.v1.ModLoaderEnvironment;
+import fuzs.puzzleslib.common.api.core.v1.ModLoaderEnvironment;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
@@ -17,6 +17,10 @@ public abstract class AbstractWidgetsContainerScreen<T extends AbstractContainer
 
     public AbstractWidgetsContainerScreen(T menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
+    }
+
+    public AbstractWidgetsContainerScreen(T menu, Inventory inventory, Component title, int imageWidth, int imageHeight) {
+        super(menu, inventory, title, imageWidth, imageHeight);
     }
 
     /**

@@ -3,10 +3,10 @@ package fuzs.enchantinginfuser.client.gui.components;
 import fuzs.enchantinginfuser.EnchantingInfuser;
 import fuzs.enchantinginfuser.client.gui.screens.inventory.InfuserScreen;
 import fuzs.enchantinginfuser.client.gui.screens.inventory.LevelBasedEntry;
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
-import fuzs.puzzleslib.api.util.v1.CommonHelper;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.puzzleslib.common.api.util.v1.CommonHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -41,7 +41,7 @@ public abstract class LevelBasedOperationButton extends ImageButton {
     protected abstract boolean isPowerLevelSufficient(LevelBasedEntry<?> levelBasedEntry);
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.isActive() && CommonHelper.hasShiftDown()) {
             Identifier identifier = this.sprites.get(true, this.isHoveredOrFocused());
             guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
@@ -57,7 +57,7 @@ public abstract class LevelBasedOperationButton extends ImageButton {
                     this.width,
                     this.height);
         } else {
-            super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
+            super.extractContents(guiGraphics, mouseX, mouseY, partialTick);
         }
 
         if (this.isPowerTooLow && this.isHoveredOrFocused()) {

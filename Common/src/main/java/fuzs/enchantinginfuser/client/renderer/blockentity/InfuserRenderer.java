@@ -16,11 +16,10 @@ import net.minecraft.client.renderer.blockentity.state.EnchantTableRenderState;
 import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.AABB;
@@ -28,17 +27,20 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 public class InfuserRenderer implements BlockEntityRenderer<InfuserBlockEntity, InfuserRenderState> {
-    public static final Material BOOK_LOCATION = Sheets.BLOCK_ENTITIES_MAPPER.apply(EnchantingInfuser.id(
-            "enchanting_infuser_book"));
+    /**
+     * @see EnchantTableRenderer#BOOK_TEXTURE
+     */
+    public static final SpriteId BOOK_TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(EnchantingInfuser.id(
+            "enchantment/enchanting_infuser_book"));
 
-    public final ItemModelResolver itemModelResolver;
-    private final MaterialSet materials;
+    private final ItemModelResolver itemModelResolver;
+    private final SpriteGetter sprites;
     private final BookModel bookModel;
     private final EnchantTableRenderer enchantTableRenderer;
 
     public InfuserRenderer(BlockEntityRendererProvider.Context context) {
         this.itemModelResolver = context.itemModelResolver();
-        this.materials = context.materials();
+        this.sprites = context.sprites();
         this.bookModel = new BookModel(context.bakeLayer(ModelLayers.BOOK));
         this.enchantTableRenderer = new EnchantTableRenderer(context);
     }
@@ -79,29 +81,29 @@ public class InfuserRenderer implements BlockEntityRenderer<InfuserBlockEntity, 
      * @see net.minecraft.client.renderer.blockentity.EnchantTableRenderer#submit(EnchantTableRenderState, PoseStack,
      *         SubmitNodeCollector, CameraRenderState)
      */
-    private void submitBook(EnchantTableRenderState enchantTableRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector) {
+    private void submitBook(EnchantTableRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector) {
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.75F, 0.5F);
-        poseStack.translate(0.0F, 0.1F + Mth.sin(enchantTableRenderState.time * 0.1F) * 0.01F, 0.0F);
-        float f = enchantTableRenderState.yRot;
-        poseStack.mulPose(Axis.YP.rotation(-f));
+        poseStack.translate(0.0F, 0.1F + Mth.sin((double) (state.time * 0.1F)) * 0.01F, 0.0F);
+        float yRot = state.yRot;
+        poseStack.mulPose(Axis.YP.rotation(-yRot));
         poseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
-        float g = Mth.frac(enchantTableRenderState.flip + 0.25F) * 1.6F - 0.3F;
-        float h = Mth.frac(enchantTableRenderState.flip + 0.75F) * 1.6F - 0.3F;
-        BookModel.State state = new BookModel.State(enchantTableRenderState.time,
-                Mth.clamp(g, 0.0F, 1.0F),
-                Mth.clamp(h, 0.0F, 1.0F),
-                enchantTableRenderState.open);
+        float ff1 = Mth.frac(state.flip + 0.25F) * 1.6F - 0.3F;
+        float ff2 = Mth.frac(state.flip + 0.75F) * 1.6F - 0.3F;
+        BookModel.State bookState = BookModel.State.forAnimation(state.time,
+                Mth.clamp(ff1, 0.0F, 1.0F),
+                Mth.clamp(ff2, 0.0F, 1.0F),
+                state.open);
         submitNodeCollector.submitModel(this.bookModel,
-                state,
+                bookState,
                 poseStack,
-                BOOK_LOCATION.renderType(RenderTypes::entitySolid),
-                enchantTableRenderState.lightCoords,
+                state.lightCoords,
                 OverlayTexture.NO_OVERLAY,
                 -1,
-                this.materials.get(BOOK_LOCATION),
+                BOOK_TEXTURE,
+                this.sprites,
                 0,
-                enchantTableRenderState.breakProgress);
+                state.breakProgress);
         poseStack.popPose();
     }
 

@@ -1,11 +1,11 @@
 package fuzs.enchantinginfuser.client.gui.components;
 
 import fuzs.enchantinginfuser.EnchantingInfuser;
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.core.component.DataComponents;
@@ -44,24 +44,24 @@ public abstract class InfuserMenuButton extends ImageButton {
     }
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.renderContents(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractContents(guiGraphics, mouseX, mouseY, partialTick);
         this.renderLabel(guiGraphics);
     }
 
-    protected void renderLabel(GuiGraphics guiGraphics) {
+    protected void renderLabel(GuiGraphicsExtractor guiGraphics) {
         Font font = Minecraft.getInstance().font;
         int posX = this.getX() + this.getWidth() - font.width(this.getMessage());
         int posY = this.getY() + this.getHeight() - font.lineHeight + 1;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (i != 0 || j != 0) {
-                    guiGraphics.drawString(font, this.backdropMessage, posX + i, posY + j, -1, false);
+                    guiGraphics.text(font, this.backdropMessage, posX + i, posY + j, -1, false);
                 }
             }
         }
 
-        guiGraphics.drawString(font, this.getMessage(), posX, posY, -1, false);
+        guiGraphics.text(font, this.getMessage(), posX, posY, -1, false);
     }
 
     public void refreshMessage(int value, boolean mayApply) {

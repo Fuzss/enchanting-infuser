@@ -1,10 +1,10 @@
 package fuzs.enchantinginfuser.network.client;
 
 import fuzs.enchantinginfuser.world.inventory.InfuserMenu;
-import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
-import fuzs.puzzleslib.api.network.v4.message.MessageListener;
-import fuzs.puzzleslib.api.network.v4.message.play.ServerboundPlayMessage;
-import fuzs.puzzleslib.api.util.v1.CommonHelper;
+import fuzs.puzzleslib.common.api.network.v4.codec.ExtraStreamCodecs;
+import fuzs.puzzleslib.common.api.network.v4.message.MessageListener;
+import fuzs.puzzleslib.common.api.network.v4.message.play.ServerboundPlayMessage;
+import fuzs.puzzleslib.common.api.util.v1.CommonHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

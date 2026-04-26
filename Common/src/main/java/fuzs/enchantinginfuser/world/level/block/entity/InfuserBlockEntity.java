@@ -4,9 +4,9 @@ import fuzs.enchantinginfuser.init.ModRegistry;
 import fuzs.enchantinginfuser.world.inventory.InfuserMenu;
 import fuzs.enchantinginfuser.world.level.block.InfuserBlock;
 import fuzs.enchantinginfuser.world.level.block.InfuserType;
-import fuzs.puzzleslib.api.block.v1.entity.TickingBlockEntity;
-import fuzs.puzzleslib.api.container.v1.ListBackedContainer;
-import fuzs.puzzleslib.api.container.v1.MenuProviderWithData;
+import fuzs.puzzleslib.common.api.block.v1.entity.TickingBlockEntity;
+import fuzs.puzzleslib.common.api.container.v1.ListBackedContainer;
+import fuzs.puzzleslib.common.api.container.v1.MenuProviderWithData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -25,6 +25,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.EnchantingTableBlockEntity;
@@ -122,8 +123,8 @@ public class InfuserBlockEntity extends EnchantingTableBlockEntity implements Wo
     }
 
     @Override
-    public void clientTick() {
-        bookAnimationTick(this.level, this.worldPosition, this.getBlockState(), this);
+    public void clientTick(Level level, BlockPos blockPos, BlockState blockState) {
+        bookAnimationTick(level, blockPos, blockState, this);
     }
 
     @Override

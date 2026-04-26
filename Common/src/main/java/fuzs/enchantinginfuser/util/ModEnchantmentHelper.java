@@ -1,6 +1,6 @@
 package fuzs.enchantinginfuser.util;
 
-import fuzs.puzzleslib.api.item.v2.EnchantingHelper;
+import fuzs.puzzleslib.common.api.item.v2.EnchantingHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

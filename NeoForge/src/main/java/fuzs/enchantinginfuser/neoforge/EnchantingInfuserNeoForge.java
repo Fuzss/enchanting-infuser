@@ -7,7 +7,7 @@ import fuzs.enchantinginfuser.data.tags.BuiltInEnchantmentTagsProvider;
 import fuzs.enchantinginfuser.data.tags.ModBlockTagsProvider;
 import fuzs.enchantinginfuser.data.tags.ModEnchantmentTagsProvider;
 import fuzs.enchantinginfuser.init.ModRegistry;
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import fuzs.puzzleslib.neoforge.api.init.v3.capability.NeoForgeCapabilityHelper;
 import net.minecraft.server.packs.PackType;
