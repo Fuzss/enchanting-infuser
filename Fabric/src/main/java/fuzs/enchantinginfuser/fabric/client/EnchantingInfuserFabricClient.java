@@ -1,7 +1,7 @@
 package fuzs.enchantinginfuser.fabric.client;
 
-import fuzs.enchantinginfuser.EnchantingInfuser;
-import fuzs.enchantinginfuser.client.EnchantingInfuserClient;
+import fuzs.enchantinginfuser.common.EnchantingInfuser;
+import fuzs.enchantinginfuser.common.client.EnchantingInfuserClient;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.fabricmc.api.ClientModInitializer;
 

@@ -1,10 +1,10 @@
 package fuzs.enchantinginfuser.neoforge.client;
 
-import fuzs.enchantinginfuser.EnchantingInfuser;
-import fuzs.enchantinginfuser.client.EnchantingInfuserClient;
-import fuzs.enchantinginfuser.data.client.ModAtlasProvider;
-import fuzs.enchantinginfuser.data.client.ModLanguageProvider;
-import fuzs.enchantinginfuser.data.client.ModModelProvider;
+import fuzs.enchantinginfuser.common.EnchantingInfuser;
+import fuzs.enchantinginfuser.common.client.EnchantingInfuserClient;
+import fuzs.enchantinginfuser.common.data.client.ModAtlasProvider;
+import fuzs.enchantinginfuser.common.data.client.ModLanguageProvider;
+import fuzs.enchantinginfuser.common.data.client.ModModelProvider;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import net.neoforged.api.distmarker.Dist;

@@ -1,6 +1,6 @@
 package fuzs.enchantinginfuser.fabric;
 
-import fuzs.enchantinginfuser.EnchantingInfuser;
+import fuzs.enchantinginfuser.common.EnchantingInfuser;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 
