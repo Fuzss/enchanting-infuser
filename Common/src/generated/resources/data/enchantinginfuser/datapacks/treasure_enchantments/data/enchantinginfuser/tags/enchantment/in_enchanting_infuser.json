@@ -1,4 +1,7 @@
 {
+  "fabric:remove": [
+    "#minecraft:curse"
+  ],
   "remove": [
     "#minecraft:curse"
   ],

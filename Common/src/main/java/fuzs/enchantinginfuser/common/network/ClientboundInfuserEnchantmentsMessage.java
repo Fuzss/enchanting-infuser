@@ -29,7 +29,7 @@ public record ClientboundInfuserEnchantmentsMessage(int containerId,
                         && menu.containerId == ClientboundInfuserEnchantmentsMessage.this.containerId) {
                     menu.setInitialEnchantments(context.level(),
                             ClientboundInfuserEnchantmentsMessage.this.itemEnchantments);
-                    if (context.client().screen instanceof InfuserScreen screen) {
+                    if (context.client().gui.screen() instanceof InfuserScreen screen) {
                         screen.refreshSearchResults();
                     }
                 }
