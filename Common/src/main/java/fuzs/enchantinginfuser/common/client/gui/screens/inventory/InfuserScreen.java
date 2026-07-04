@@ -7,6 +7,7 @@ import fuzs.enchantinginfuser.common.client.util.EnchantmentTooltipHelper;
 import fuzs.enchantinginfuser.common.network.client.ServerboundEnchantmentLevelMessage;
 import fuzs.enchantinginfuser.common.world.inventory.InfuserMenu;
 import fuzs.puzzleslib.common.api.client.gui.v2.components.AbstractMenuSelectionList;
+import fuzs.puzzleslib.common.api.client.gui.v2.screens.inventory.AbstractWidgetsContainerScreen;
 import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
