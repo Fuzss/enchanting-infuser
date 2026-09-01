@@ -6,11 +6,17 @@
     "26.1.x": "maintained",
     "26.2.x": "primary"
   },
-  "properties": {
-    "distributions.curseforge.id": "551151",
-    "distributions.curseforge.slug": "enchanting-infuser",
-    "distributions.github.slug": "enchanting-infuser",
-    "distributions.modrinth.id": "ePv85y52",
-    "distributions.modrinth.slug": "enchanting-infuser"
+  "distributions": {
+    "curseforge": {
+      "id": "551151",
+      "slug": "enchanting-infuser"
+    },
+    "github": {
+      "slug": "enchanting-infuser"
+    },
+    "modrinth": {
+      "id": "ePv85y52",
+      "slug": "enchanting-infuser"
+    }
   }
 }
