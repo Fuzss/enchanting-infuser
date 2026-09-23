@@ -1,20 +1,21 @@
 package fuzs.enchantinginfuser.common.data;
 
 import fuzs.enchantinginfuser.common.init.ModRegistry;
-import fuzs.puzzleslib.common.api.data.v2.AbstractRecipeProvider;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.data.v3.recipes.AbstractRecipeProvider;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 
 public class ModRecipeProvider extends AbstractRecipeProvider {
 
-    public ModRecipeProvider(DataProviderContext context) {
-        super(context);
+    public ModRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+        super(recipeOutput, advancementOutput);
     }
 
     @Override
-    public void addRecipes(RecipeOutput recipeOutput) {
+    public void buildRecipes() {
         this.shaped(RecipeCategory.DECORATIONS, ModRegistry.INFUSER_ITEM.value())
                 .define('B', Items.BOOK)
                 .define('#', Items.CRYING_OBSIDIAN)
@@ -24,7 +25,7 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 .pattern("A#A")
                 .pattern("#T#")
                 .unlockedBy(getHasName(Items.AMETHYST_SHARD), this.has(Items.AMETHYST_SHARD))
-                .save(recipeOutput);
+                .save(this.output);
         this.shaped(RecipeCategory.DECORATIONS, ModRegistry.ADVANCED_INFUSER_ITEM.value())
                 .define('B', Items.BOOK)
                 .define('#', Items.CRYING_OBSIDIAN)
@@ -34,6 +35,6 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 .pattern("A#A")
                 .pattern("#T#")
                 .unlockedBy(getHasName(Items.NETHERITE_INGOT), this.has(Items.NETHERITE_INGOT))
-                .save(recipeOutput);
+                .save(this.output);
     }
 }

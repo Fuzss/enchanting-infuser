@@ -1,14 +1,12 @@
 package fuzs.enchantinginfuser.common.world.level.block;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fuzs.enchantinginfuser.common.EnchantingInfuser;
 import fuzs.enchantinginfuser.common.config.ModifiableItems;
 import fuzs.enchantinginfuser.common.init.ModRegistry;
 import fuzs.enchantinginfuser.common.world.item.enchantment.EnchantingBehavior;
 import fuzs.enchantinginfuser.common.world.level.block.entity.InfuserBlockEntity;
 import fuzs.puzzleslib.common.api.block.v1.entity.TickingEntityBlock;
-import fuzs.puzzleslib.common.api.init.v3.registry.ResourceKeyHelper;
+import fuzs.puzzleslib.common.api.init.v3.registry.ContentRegistrationHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,6 +15,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -37,16 +36,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class InfuserBlock extends BaseEntityBlock implements TickingEntityBlock<InfuserBlockEntity> {
-    public static final MapCodec<InfuserBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-        return instance.group(InfuserType.CODEC.fieldOf("type").forGetter(InfuserBlock::getType), propertiesCodec())
-                .apply(instance, InfuserBlock::new);
-    });
-    public static final Component COMPONENT_CHOOSE = ResourceKeyHelper.getComponent(Registries.BLOCK,
-            EnchantingInfuser.id("enchanting_infuser.description.choose"));
-    public static final Component COMPONENT_CHOOSE_AND_MODIFY = ResourceKeyHelper.getComponent(Registries.BLOCK,
-            EnchantingInfuser.id("enchanting_infuser.description.choose_and_modify"));
-    public static final Component COMPONENT_REPAIR = ResourceKeyHelper.getComponent(Registries.BLOCK,
-            EnchantingInfuser.id("enchanting_infuser.description.repair"));
+    public static final Component COMPONENT_CHOOSE = ContentRegistrationHelper.getTranslationComponent(
+            ResourceKey.create(Registries.BLOCK, EnchantingInfuser.id("enchanting_infuser.description.choose")));
+    public static final Component COMPONENT_CHOOSE_AND_MODIFY = ContentRegistrationHelper.getTranslationComponent(
+            ResourceKey.create(Registries.BLOCK, EnchantingInfuser.id("enchanting_infuser.description.choose_and_modify")));
+    public static final Component COMPONENT_REPAIR = ContentRegistrationHelper.getTranslationComponent(
+            ResourceKey.create(Registries.BLOCK, EnchantingInfuser.id("enchanting_infuser.description.repair")));
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
 
     private final InfuserType type;
@@ -69,11 +64,6 @@ public class InfuserBlock extends BaseEntityBlock implements TickingEntityBlock<
         } else {
             return false;
         }
-    }
-
-    @Override
-    public MapCodec<InfuserBlock> codec() {
-        return CODEC;
     }
 
     public InfuserType getType() {

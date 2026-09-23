@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "enchantinginfuser:advanced_enchanting_infuser"
+        "recipes": "enchantinginfuser:advanced_enchanting_infuser"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

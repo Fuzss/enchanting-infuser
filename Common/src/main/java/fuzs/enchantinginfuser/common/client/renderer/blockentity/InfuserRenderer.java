@@ -86,8 +86,8 @@ public class InfuserRenderer implements BlockEntityRenderer<InfuserBlockEntity, 
         poseStack.translate(0.5F, 0.75F, 0.5F);
         poseStack.translate(0.0F, 0.1F + Mth.sin((double) (state.time * 0.1F)) * 0.01F, 0.0F);
         float yRot = state.yRot;
-        poseStack.mulPose(Axis.YP.rotation(-yRot));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
+        poseStack.rotate(Axis.YP.rotation(-yRot));
+        poseStack.rotate(Axis.ZP.rotationDegrees(80.0F));
         float ff1 = Mth.frac(state.flip + 0.25F) * 1.6F - 0.3F;
         float ff2 = Mth.frac(state.flip + 0.75F) * 1.6F - 0.3F;
         BookModel.State bookState = BookModel.State.forAnimation(state.time,
@@ -102,8 +102,19 @@ public class InfuserRenderer implements BlockEntityRenderer<InfuserBlockEntity, 
                 -1,
                 BOOK_TEXTURE,
                 this.sprites,
-                0,
-                state.breakProgress);
+                0);
+        if (state.breakProgress != null) {
+            submitNodeCollector.order(1)
+                    .submitCrumblingOverlay(this.bookModel,
+                            bookState,
+                            poseStack,
+                            BOOK_TEXTURE.renderType(this.bookModel.renderType()),
+                            state.lightCoords,
+                            OverlayTexture.NO_OVERLAY,
+                            -1,
+                            state.breakProgress);
+        }
+
         poseStack.popPose();
     }
 
@@ -123,7 +134,7 @@ public class InfuserRenderer implements BlockEntityRenderer<InfuserBlockEntity, 
                     0.0);
             float scale = renderState.open * 0.8F + 0.2F;
             poseStack.scale(scale, scale, scale);
-            poseStack.mulPose(Axis.YP.rotation(renderState.time / 20.0F));
+            poseStack.rotate(Axis.YP.rotation(renderState.time / 20.0F));
             renderState.item.submit(poseStack,
                     submitNodeCollector,
                     renderState.lightCoords,

@@ -1,17 +1,17 @@
 package fuzs.enchantinginfuser.common.data.loot;
 
 import fuzs.enchantinginfuser.common.init.ModRegistry;
-import fuzs.puzzleslib.common.api.data.v2.AbstractLootProvider;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.data.v3.loot.AbstractBlockLootSubProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 
-public class ModBlockLootProvider extends AbstractLootProvider.Blocks {
+public class ModBlockLootProvider extends AbstractBlockLootSubProvider {
 
-    public ModBlockLootProvider(DataProviderContext context) {
+    public ModBlockLootProvider(LootTableSubProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void addLootTables() {
+    public void generate() {
         this.add(ModRegistry.INFUSER_BLOCK.value(), this::createNameableBlockEntityTable);
         this.add(ModRegistry.ADVANCED_INFUSER_BLOCK.value(), this::createNameableBlockEntityTable);
     }
