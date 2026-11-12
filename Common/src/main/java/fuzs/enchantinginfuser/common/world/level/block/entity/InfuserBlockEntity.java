@@ -4,6 +4,7 @@ import fuzs.enchantinginfuser.common.init.ModRegistry;
 import fuzs.enchantinginfuser.common.world.inventory.InfuserMenu;
 import fuzs.enchantinginfuser.common.world.level.block.InfuserBlock;
 import fuzs.enchantinginfuser.common.world.level.block.InfuserType;
+import fuzs.puzzleslib.common.api.block.v1.entity.BlockEntityHelper;
 import fuzs.puzzleslib.common.api.block.v1.entity.TickingBlockEntity;
 import fuzs.puzzleslib.common.api.container.v1.ListBackedContainer;
 import fuzs.puzzleslib.common.api.container.v1.MenuProviderWithData;
@@ -26,8 +27,8 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.EnchantingTableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -40,14 +41,8 @@ public class InfuserBlockEntity extends EnchantingTableBlockEntity implements Wo
     private LockCode lockKey = LockCode.NO_LOCK;
 
     public InfuserBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(blockPos, blockState);
-        this.type = this.getType();
-    }
-
-    @Override
-    public BlockEntityType<?> getType() {
-        // set in super constructor, so just override the whole method
-        return ModRegistry.INFUSER_BLOCK_ENTITY_TYPE.value();
+        super(blockPos, Blocks.ENCHANTING_TABLE.defaultBlockState());
+        BlockEntityHelper.init(this, ModRegistry.INFUSER_BLOCK_ENTITY_TYPE.value(), blockState);
     }
 
     @Override
